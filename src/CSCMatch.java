@@ -6,6 +6,8 @@
 
 import java.util.*;
 
+import java.io.File;
+
 public class CSCMatch
 
 {
@@ -71,21 +73,87 @@ public class CSCMatch
 
             {
 
+                Scanner file = new Scanner(System.in);
+
                 System.out.println("Please enter filename to load from.");
 
                 System.out.print("Input: ");
 
+                String fileCheck = file.next();
+
+                File  userFile = new File(fileCheck);
+
+                if (fileCheck.contains("Return to Menu"))
+
+                {
+
+
+
+                }
+
+                else if(!userFile.exists())
+
+                {
+
+                System.out.println("That file was not found, please enter another file.");
+
+                }
+
+                else if (userFile.exists())
+
+                {
+
+                    System.out.println("File was found.");
+
+                }
+
             }
+
+
+            // Save the Members
 
             else if (input == 2)
 
             {
 
+                Scanner file = new Scanner(System.in);
+
                 System.out.println("Enter File to be Saved to.");
 
                 System.out.print("Input: ");
 
+                String fileCheck = file.next();
+
+                File  userFile = new File(fileCheck);
+
+                if (fileCheck.contains("Return to Menu"))
+
+                {
+
+
+
+                }
+
+                else if(!userFile.exists())
+
+                {
+
+                    System.out.println("That file was not found, please enter another file.");
+
+                }
+
+                else if (userFile.exists())
+
+                {
+
+                    System.out.println("File was found.");
+
+                }
+
+
             }
+
+            // List all Members
 
             else if (input == 3)
 
@@ -95,21 +163,33 @@ public class CSCMatch
 
             }
 
+            // Add a Member
+
             else if (input == 4)
 
             {
 
                 System.out.println("Adding Member");
 
+                System.out.println("");
+
             }
+
+            // Remove Member
 
             else if (input == 5)
 
             {
 
-                System.out.println("Remove Member");
+                System.out.println("Removing Member");
+
+                System.out.println("Please enter name of member to be removed.");
+
+                System.out.print("input");
 
             }
+
+            // List Member
 
             else if (input == 6)
 
@@ -122,6 +202,8 @@ public class CSCMatch
                 System.out.print("Input: ");
 
             }
+
+            // Add an interest to a member
 
             else if (input == 7)
 

@@ -1,2 +1,7 @@
-public class MemberList {
+public class MemberList
+
+{
+
+
+
 }
