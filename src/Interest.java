@@ -10,7 +10,9 @@ public class Interest
 
     {
 
-
+          // Use scnr to input name and int 
+        //Method to change name and int level
+        
 
     }
 
