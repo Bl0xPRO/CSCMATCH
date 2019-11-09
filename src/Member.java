@@ -7,10 +7,11 @@ public abstract class Member
 
     private String topFiveMatches;
 
-    public Member (String name, String year, String matches)
+    public Member (String name, String year)
 
     {
-
+    	this.name = name;
+    	this.year = year;
 
 
     }

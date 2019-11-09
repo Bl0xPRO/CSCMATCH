@@ -5,7 +5,6 @@
  */
 
 import java.util.*;
-
 import java.io.File;
 
 public class CSCMatch
@@ -29,7 +28,8 @@ public class CSCMatch
         System.out.println("List Member [6]");
         System.out.println("Add an Interest to a Member [7]");
         System.out.println("Quit [8]\n");
-
+     
+        MemberList membership = new MemberList();
         // work keeps the program working when the exception is encountered.
 
         int work = 1;
@@ -86,34 +86,20 @@ public class CSCMatch
                 if (fileCheck.contains("Return to Menu"))
 
                 {
-
-
-
+                	
                 }
-
                 else if(!userFile.exists())
-
                 {
-
                 System.out.println("That file was not found, please enter another file.");
-
                 }
-
                 else if (userFile.exists())
-
                 {
-
                     System.out.println("File was found.");
-
                 }
-
             }
 
-
             // Save the Members
-
             else if (input == 2)
-
             {
 
                 Scanner file = new Scanner(System.in);
@@ -166,13 +152,31 @@ public class CSCMatch
             // Add a Member
 
             else if (input == 4)
-
             {
-
-                System.out.println("Adding Member");
-
-                System.out.println("");
-
+            	System.out.println("Adding Member");
+            	
+            	Scanner kb = new Scanner(System.in);
+            	try 
+            	{
+            		
+            	
+	            	System.out.println("Enter new member name");	//insert string compare to check for unique name
+	            	String name = kb.nextLine();
+	            	
+	            	System.out.println("Enter member year 1-5");	//Ensure that 
+	            	int year = kb.nextInt();
+	            	if(year < 0 || year > 5)
+	            	{
+	            		System.out.println("Enter a year 1-5");
+	            		year = kb.nextInt();
+	            	}
+	            	
+	                membership.addMember(name, year);
+	                System.out.println("");
+            	} catch(InputMismatchException e)
+            	{
+            		System.out.println("Enter only integer values!");
+            	}
             }
 
             // Remove Member
