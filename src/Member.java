@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.Scanner;
 import java.util.LinkedList;
 
-public abstract class Member implements Serializable
+public class Member implements Serializable
 
 {
     public String name;
