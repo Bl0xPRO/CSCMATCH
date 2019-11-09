@@ -2,11 +2,11 @@ public class Interest
 
 {
 
-    private String topic;
+    public String topic;
 
-    private int topicInterest;
+    public int topicInterest;
 
-    public Interest (String topic, String topicInterest)
+    public Interest (String topic, int topicInterest)
 
     {
 
