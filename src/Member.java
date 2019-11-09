@@ -30,9 +30,8 @@ public class Member implements Serializable
 	   this.year = year;
    }
    
-//   public void addInterest(String topic, int topicInterest)
-//  {
-//	   
-//  }
-   
+   public void addInterest(String topic, int topicInterest)
+  {
+	//   interestList.add();
+   }
 }
