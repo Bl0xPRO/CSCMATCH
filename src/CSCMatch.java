@@ -3,22 +3,19 @@
     Description:
     Date: 11/14/19
  */
-
-import java.util.*;
 import java.io.File;
+import java.util.*;
 
-public class CSCMatch
-
+public class CSCMatch 
 {
 
-    public static void main (String[] args) {
-
-        // Print out user intro and user menu
-
-        System.out.println("Welcome to CSC Match, the Java program for finding matches with fellow CSC students!");
+	public static void main(String[] args) 
+	{
+		//Introduction to the program
+		System.out.println("Welcome to CSC Match, the Java program for finding matches with fellow CSC students!");
         System.out.println("Please use the menu below to navigate the user database. \n");
-
-
+        System.out.println("Enter one number to select your option");
+        //User Menu
         System.out.println("User Menu\n");
         System.out.println("Load the Members [1]");
         System.out.println("Save the Members [2]");
@@ -28,142 +25,99 @@ public class CSCMatch
         System.out.println("List Member [6]");
         System.out.println("Add an Interest to a Member [7]");
         System.out.println("Quit [8]\n");
-     
+
+        //add membership object
         MemberList membership = new MemberList();
-        // work keeps the program working when the exception is encountered.
-
-        int work = 1;
-
-        while (work == 1)
-
+        
+        //Switch case menu
+        
+        int select = 0;
+       
+    	  boolean work = true;
+    	  
+       while(work)
+        try 
         {
+        	Scanner in = new Scanner(System.in);
 
-        try {
+            System.out.print("Select: ");
 
-            Scanner in = new Scanner(System.in);
-
-            System.out.print("Input: ");
-
-            int input = in.nextInt();
-
-
-            // Logic to make sure only menu integers are allowed.
-
-            while (input < 1) {
-
-                System.out.println("Sorry, please input an integer from the menu.");
-
-                input = in.nextInt();
-
-            }
-
-            while (input > 8) {
-
-                System.out.println("Sorry, please input an integer from the menu.");
-
-                input = in.nextInt();
-
-            }
-
-            // Logic to determine navigation of program.
-
-            // Load the members
-
-            if (input == 1)
-
+            select = in.nextInt();
+            if(select > 8) //Instructs user to enter correct input
             {
-
-                Scanner file = new Scanner(System.in);
-
-                System.out.println("Please enter filename to load from.");
-
-                System.out.print("Input: ");
-
-                String fileCheck = file.next();
-
-                File  userFile = new File(fileCheck);
-
-                if (fileCheck.contains("Return to Menu"))
-
-                {
-                	
-                }
-                else if(!userFile.exists())
-                {
-                System.out.println("That file was not found, please enter another file.");
-                }
-                else if (userFile.exists())
-                {
-                    System.out.println("File was found.");
-                }
+            	System.out.println("Enter a number 1-8");
+            	System.out.println();
+            	select = in.nextInt();
             }
+            
+        	switch(select)
+	        {
+	        case 1:
+	        	 Scanner file = new Scanner(System.in);
+	             System.out.println("Please enter filename to load from.");
+	             System.out.print("Input: ");
+	
+	             String fileCheck = file.next();
+	
+	             File  userFile = new File(fileCheck);
+	
+	             if (fileCheck.contains("Return to Menu"))
+	             {
+	             	
+	             }
+	             else if(!userFile.exists())
+	             {
+	             System.out.println("That file was not found, please enter another file.");
+	             }
+	             else if (userFile.exists())
+	             {
+	                 System.out.println("File was found.");
+	             }
+	           break;
+	        case 2: 
+	        	 Scanner file1 = new Scanner(System.in);
 
-            // Save the Members
-            else if (input == 2)
-            {
+	                System.out.println("Enter File to be Saved to.");
+	                System.out.print("Input: ");
 
-                Scanner file = new Scanner(System.in);
+	                String fileCheck1 = file1.next();
+	                File  userFile1 = new File(fileCheck1);
 
-                System.out.println("Enter File to be Saved to.");
+	                if (fileCheck1.contains("Return to Menu"))
+	                {
+	                	
+	                }
+	                else if(!userFile1.exists())
+	                {
+	                    System.out.println("That file was not found, please enter another file.");
+	                }
+	                else if (userFile1.exists())
+	                {
+	                    System.out.println("File was found.");
+	                }
+	            
 
-                System.out.print("Input: ");
-
-                String fileCheck = file.next();
-
-                File  userFile = new File(fileCheck);
-
-                if (fileCheck.contains("Return to Menu"))
-
-                {
-
-
-
-                }
-
-                else if(!userFile.exists())
-
-                {
-
-                    System.out.println("That file was not found, please enter another file.");
-
-                }
-
-                else if (userFile.exists())
-
-                {
-
-                    System.out.println("File was found.");
-
-                }
-
-
-            }
-
-            // List all Members
-
-            else if (input == 3)
-
-            {
-
-                System.out.println("Listing All Members");
-
-            }
-
-            // Add a Member
-
-            else if (input == 4)
-            {
-            	System.out.println("Adding Member");
+	            // List all Members
+	        	
+	        	break;
+	        	
+	        case 3: 
+	        		System.out.println("Listing All Members");
+	        		
+	        	break;
+	    
+	        case 4: 
+	        		System.out.println("Adding Member");
             	
-            	Scanner kb = new Scanner(System.in);
-            	try 
+	        		Scanner kb = new Scanner(System.in);
+	        		try 
             	{
             		
             	
-	            	System.out.println("Enter new member name");	//insert string compare to check for unique name
+	            	System.out.println("Enter new member name");	
 	            	String name = kb.nextLine();
 	            	
-	            	System.out.println("Enter member year 1-5");	//Ensure that 
+	            	System.out.println("Enter member year 1-5");	//Ensure that user input meets parameters
 	            	int year = kb.nextInt();
 	            	if(year < 0 || year > 5)
 	            	{
@@ -173,74 +127,50 @@ public class CSCMatch
 	            	
 	                membership.addMember(name, year);
 	                System.out.println("");
-            	} catch(InputMismatchException e)
+            	} 
+	        		catch(InputMismatchException e)
             	{
             		System.out.println("Enter only integer values!");
             	}
-            }
-
-            // Remove Member
-
-            else if (input == 5)
-
-            {
+	        	break;
+	        	
+	        case 5: 
 
                 System.out.println("Removing Member");
-
                 System.out.println("Please enter name of member to be removed.");
-
                 System.out.print("input");
-
-            }
-
-            // List Member
-
-            else if (input == 6)
-
-            {
-
-                System.out.println("List Member");
-
+	        	break;
+	        	
+	        case 6: 
+	        	
+	        	System.out.println("List Member");
                 System.out.println("Please Enter Member Name.");
-
                 System.out.print("Input: ");
 
-            }
+	        	break;
+	        case 7:
+	        		System.out.println("Add Interest to Member");
 
-            // Add an interest to a member
-
-            else if (input == 7)
-
-            {
-
-                System.out.println("Add Interest to Member");
-
-                System.out.println("Please Enter Member Name:");
-
-            }
-
-            else if (input == 8) {
-
-                System.out.println("Thank you for using CSC Match.");
-
-                System.exit(0);
-
-            }
-
+	                System.out.println("Please Enter Member Name:");
+	        	break;
+	        	
+	        case 8: 
+	        	  System.out.println("Thank you for using CSC Match.");
+	                System.exit(0);	
+	        	break;
+	        }
         }
-
         catch (InputMismatchException e)
+        	{
+        		System.out.println("Please enter a number 1-8");
+        	}
+       	catch(NoSuchElementException e)
+       		{
+       			System.out.println("Please enter a number 1-8");
+       		}
+        work = false;
+	}
 
-        {
-
-            System.out.println("Error: Only Input Integers for Menu Navigation.\n");
-
-        }
-
-
-    }
-
-
-    }
-    
 }
+
+
