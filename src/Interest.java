@@ -1,20 +1,51 @@
+package CSCMatch;
+import java.util.Scanner;
+
 public class Interest
-
 {
-
-    public String topic;
-
-    public int topicInterest;
-
-    public Interest (String topic, int topicInterest)
-
-    {
-
-          // Use scnr to input name and int 
-        //Method to change name and int level
-        
-
-    }
-
-
+//public Interest (String topic, int topicInterest)
+	
+	//NOTES
+	/* I was told to use scanner so I did but 
+	 * In case we change that I commented out diffrent uses
+	 * I also used print line we can remove it if thats not something we want. 
+	 * 
+	 */
+	
+	//Variables
+	public String topic;
+	public int TopicIntrest;
+	
+	//Scanner = scnr
+	Scanner scnr = new Scanner(System.in);	
+	
+	
+	//Methods below
+	public void enterTopicName(String topic) {
+		
+		System.out.println("Enter topic name: ");
+		topic = scnr.nextLine();
+		//this.topic = topic;
+	}
+	
+	public void enterTopicIntrest(int TopicIntrest) {
+		
+		System.out.println("Enter topic Intrest level: ");
+		TopicIntrest = scnr.nextInt();
+		//this.TopicIntrest = TopicIntrest;
+	}
+	
+	public void changeTopicName(String topic) {
+		
+		System.out.println("What would you like to change the topic name to?: ");
+		topic = scnr.nextLine();
+		//this.topic = topic;
+	}
+	
+	public void changeTopicIntrest(int TopicIntrest) {
+		
+		System.out.println("What would you like to change the Intrest level to?: ");
+		TopicIntrest = scnr.nextInt();
+		//this.TopicIntrest = TopicIntrest;
+	}
 }
