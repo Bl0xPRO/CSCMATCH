@@ -12,7 +12,7 @@ public class CSCMatch
 	public static void main(String[] args) 
 	{
 		//Introduction to the program
-		System.out.println("Welcome to CSC Match, the Java program for finding matches with fellow CSC students!");
+	System.out.println("Welcome to CSC Match, the Java program for finding matches with fellow CSC students!");
         System.out.println("Please use the menu below to navigate the user database. \n");
         System.out.println("Enter one number to select your option");
         //User Menu
@@ -38,7 +38,7 @@ public class CSCMatch
        while(work)
         try 
         {
-        	Scanner in = new Scanner(System.in);
+            Scanner in = new Scanner(System.in);
 
             System.out.print("Select: ");
 
@@ -53,30 +53,29 @@ public class CSCMatch
         	switch(select)
 	        {
 	        case 1:
-	        	 Scanner file = new Scanner(System.in);
-	             System.out.println("Please enter filename to load from.");
-	             System.out.print("Input: ");
-	
-	             String fileCheck = file.next();
-	
-	             File  userFile = new File(fileCheck);
-	
-	             if (fileCheck.contains("Return to Menu"))
-	             {
-	             	
-	             }
-	             else if(!userFile.exists())
-	             {
-	             System.out.println("That file was not found, please enter another file.");
-	             }
-	             else if (userFile.exists())
-	             {
-	                 System.out.println("File was found.");
-	             }
-	           break;
-	        case 2: 
-	        	 Scanner file1 = new Scanner(System.in);
+		  	Scanner file = new Scanner(System.in);
+		        System.out.println("Please enter filename to load from.");
+	                System.out.print("Input: ");
 
+		     	String fileCheck = file.next();
+
+			File  userFile = new File(fileCheck);
+
+			if (fileCheck.contains("Return to Menu"))
+			   {
+
+			   }
+			else if(!userFile.exists())
+			   {
+			     System.out.println("That file was not found, please enter another file.");
+			   }
+			else if (userFile.exists())
+			   {
+			     System.out.println("File was found.");
+			   }
+		   break;
+	        case 2: 
+	                Scanner file1 = new Scanner(System.in);
 	                System.out.println("Enter File to be Saved to.");
 	                System.out.print("Input: ");
 
@@ -95,25 +94,17 @@ public class CSCMatch
 	                {
 	                    System.out.println("File was found.");
 	                }
-	            
-
-	            // List all Members
-	        	
-	        	break;
-	        	
+	            	
+	           break;
 	        case 3: 
-	        		System.out.println("Listing All Members");
-	        		
-	        	break;
-	    
+	        	System.out.println("Listing All Members");	
+	           break;
 	        case 4: 
-	        		System.out.println("Adding Member");
+	        	System.out.println("Adding Member");
             	
-	        		Scanner kb = new Scanner(System.in);
-	        		try 
-            	{
-            		
-            	
+	        	Scanner kb = new Scanner(System.in);
+	      	  try 
+		   {
 	            	System.out.println("Enter new member name");	
 	            	String name = kb.nextLine();
 	            	
@@ -127,37 +118,30 @@ public class CSCMatch
 	            	
 	                membership.addMember(name, year);
 	                System.out.println("");
-            	} 
-	        		catch(InputMismatchException e)
-            	{
+            	   } 
+	           catch(InputMismatchException e)
+            	   {
             		System.out.println("Enter only integer values!");
-            	}
-	        	break;
-	        	
+            	   }
+	           break;	
 	        case 5: 
-
-                System.out.println("Removing Member");
-                System.out.println("Please enter name of member to be removed.");
-                System.out.print("input");
-	        	break;
-	        	
-	        case 6: 
-	        	
+                	System.out.println("Removing Member");
+                	System.out.println("Please enter name of member to be removed.");
+                	System.out.print("input");
+	             break;
+	        case 6:
 	        	System.out.println("List Member");
-                System.out.println("Please Enter Member Name.");
-                System.out.print("Input: ");
-
-	        	break;
+                	System.out.println("Please Enter Member Name.");
+                	System.out.print("Input: ");
+	            break;
 	        case 7:
-	        		System.out.println("Add Interest to Member");
-
+	        	System.out.println("Add Interest to Member");
 	                System.out.println("Please Enter Member Name:");
 	        	break;
-	        	
 	        case 8: 
-	        	  System.out.println("Thank you for using CSC Match.");
+	        	System.out.println("Thank you for using CSC Match.");
 	                System.exit(0);	
-	        	break;
+	            break;
 	        }
         }
         catch (InputMismatchException e)
