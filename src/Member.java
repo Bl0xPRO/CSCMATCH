@@ -48,6 +48,8 @@ public class Member implements Serializable
 	   return name;
    }
    
+   public int getYear() { return year;}
+   
    
    public int calculateCompatability(Member m2)
    {
