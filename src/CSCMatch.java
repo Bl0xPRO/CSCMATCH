@@ -124,12 +124,12 @@ public class CSCMatch
                     case 3:
 
                         System.out.println("Listing All Members");
-
-                        System.out.println("Please input");
-
-
+                       
+                        for(Member allMembers : membership)
+                        {
+                        	System.out.println(allMembers);
+                        }
                         break;
-
 
 
                     case 4: // Only option that is good
