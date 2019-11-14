@@ -48,4 +48,12 @@ public class Interest
 		TopicIntrest = scnr.nextInt();
 		//this.TopicIntrest = TopicIntrest;
 	}
+	public String getTopic()
+	{
+	return topic;
+	}
+	public int getTopicInterest()
+	{
+		return topicInterest;
+	}
 }
