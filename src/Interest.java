@@ -1,4 +1,3 @@
-package CSCMatch;
 import java.util.Scanner;
 
 public class Interest
@@ -32,7 +31,7 @@ public class Interest
 		
 		//System.out.println("Enter topic Intrest level: ");
 		//TopicIntrest = scnr.nextInt();
-		this.TopicIntrest = TopicIntrest;
+		this.topicInterest = TopicIntrest;
 	}
 	
 	public void changeTopicName(String topic) {
@@ -46,7 +45,7 @@ public class Interest
 		
 		//System.out.println("What would you like to change the Intrest level to?: ");
 		//TopicIntrest = scnr.nextInt();
-		this.TopicIntrest = TopicIntrest;
+		this.topicInterest = TopicIntrest;
 	}
 	public String getTopic()
 	{
