@@ -42,7 +42,7 @@ public void removeMember()
 {
 	memberList.remove();
 }
-	//save file
+	//save file (Taken from POS)
 public void save(String fileName) throws IOException
 {
 	FileOutputStream fos = new FileOutputStream(fileName); 
@@ -51,7 +51,7 @@ public void save(String fileName) throws IOException
 	oos.flush(); 
 	oos.close(); 
 }
-	//load members
+	//load members (Taken from POS)
 public static MemberList load(String fileName) throws IOException, ClassNotFoundException
 {
 	FileInputStream fis = new FileInputStream(fileName);
