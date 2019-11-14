@@ -14,7 +14,7 @@ public class Interest
 	
 	//Variables
 	public String topic;
-	public int TopicIntrest;
+	public int topicInterest;
 	
 	//Scanner = scnr
 	Scanner scnr = new Scanner(System.in);	
