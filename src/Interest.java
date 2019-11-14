@@ -17,40 +17,40 @@ public class Interest
 	public int topicInterest;
 	
 	//Scanner = scnr
-	Scanner scnr = new Scanner(System.in);	
+	//Scanner scnr = new Scanner(System.in);	
 	
 	
 	//Methods below
 	public void enterTopicName(String topic) {
 		
-		System.out.println("Enter topic name: ");
-		topic = scnr.nextLine();
-		//this.topic = topic;
+		//System.out.println("Enter topic name: ");
+		//topic = scnr.nextLine();
+		this.topic = topic;
 	}
 	
 	public void enterTopicIntrest(int TopicIntrest) {
 		
-		System.out.println("Enter topic Intrest level: ");
-		TopicIntrest = scnr.nextInt();
-		//this.TopicIntrest = TopicIntrest;
+		//System.out.println("Enter topic Intrest level: ");
+		//TopicIntrest = scnr.nextInt();
+		this.TopicIntrest = TopicIntrest;
 	}
 	
 	public void changeTopicName(String topic) {
 		
-		System.out.println("What would you like to change the topic name to?: ");
-		topic = scnr.nextLine();
-		//this.topic = topic;
+		//System.out.println("What would you like to change the topic name to?: ");
+		//topic = scnr.nextLine();
+		this.topic = topic;
 	}
 	
 	public void changeTopicIntrest(int TopicIntrest) {
 		
-		System.out.println("What would you like to change the Intrest level to?: ");
-		TopicIntrest = scnr.nextInt();
-		//this.TopicIntrest = TopicIntrest;
+		//System.out.println("What would you like to change the Intrest level to?: ");
+		//TopicIntrest = scnr.nextInt();
+		this.TopicIntrest = TopicIntrest;
 	}
 	public String getTopic()
 	{
-	return topic;
+		return topic;
 	}
 	public int getTopicInterest()
 	{
