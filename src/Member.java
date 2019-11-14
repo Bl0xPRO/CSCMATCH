@@ -9,8 +9,6 @@ public class Member implements Serializable
 
     public int year;
     
-    public int sum;
-    
 	Scanner kb = new Scanner(System.in);
     
 	LinkedList<Interest> interestList = new LinkedList<Interest>();
@@ -51,24 +49,32 @@ public class Member implements Serializable
    }
    
    
-   public double calculateCompatability(Member m2)
+   public int calculateCompatability(Member m2)
    {
-	   for( Interest i : this.interestList) 
+	   
+	   int sum = 0;
+	   
+	   for( Interest i : m2.interestList) 
 	   {
-		 for (Interest i2 : m2.interestList)
+		   
+		   boolean found = false;
+		   
+		 for (Interest i2 : this.interestList)
 		 {
 			 if(i.getTopic().equalsIgnoreCase(i2.getTopic())) 
 			 {
 				 sum = sum + (i.getTopicInterest() * i2.getTopicInterest());
+				 found = true;
 			 }
-			 else
-			 {
-				sum = sum + (i2.getTopicInterest() / 2); 
-			 }
+		 } 
+		if(found = false)
+		{
+			sum = sum + ( i.getTopicInterest() / 2 );
+		}
+			 
 		 }
-	   }
 	  
-	   
+	   return sum;
    }
    
    
