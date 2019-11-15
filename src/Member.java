@@ -1,73 +1,105 @@
-import java.util.LinkedList;	
-import java.util.Iterator;
-import java.util.*;
-import java.io.*;
-public class MemberList implements Iterable<Member>, Serializable, Comparable<Member>
+import java.io.Serializable;
+import java.util.Scanner;
+import java.util.LinkedList;
 
-{	static //Create List for members
-	//add save and load method for memberList
+public class Member implements Serializable
+
+{
+    public String name;
+
+    public int year;
+    
+    public int score;
+    
+	Scanner kb = new Scanner(System.in);
+    
+	LinkedList<Interest> interestList = new LinkedList<Interest>();
 	LinkedList<Member> memberList = new LinkedList<Member>();
+	LinkedList<Member> top5 = new LinkedList<Member>();
 	
-public void addMember(String name, int year) 
-{
-	//Create member object with parameters for name and year
-	//If Member name is unique then add, if not then change name
-	Member M = new Member(name, year);
-		
-	memberList.add(M);
-		
-		
-	}
-	// Instantiate iterator and get its methods
-public Iterator<Member> iterator() 	
+    public Member (String name, int year) 
+
+    {
+
+    	this.name = name;
+    	this.year = year;
+    	this.score = -1000;
+
+    }
+
+   public void changeName(String name) {
+	   this.name = name;
+   }
+   
+   public void changeYear(int year) {
+	   this.year = year;
+   }
+   
+   public void addInterest(String interest, int interestLevel)
+  {
+	   boolean found = false;
+	for(Interest in : interestList)
 	{
-		return memberList.iterator();
-	}
-	//add method for comparing unique name using for each 
-public Member existingMember(String name)
-{
-	Member found = null;
-	
-	for(Member m: memberList)
-		{
-			if(name.equals(m.getName()))
-			{
-				found = m;
-			}
-		}
 		
-		return found;
+		if(interest.equalsIgnoreCase(in.getTopic()))
+		{
+			found = true;
+			in.changeTopicInterest(interestLevel);	
+		}
 	}
-public static void removeMember(Member m)
-{
-	memberList.remove();
-}
-	//save file
-public void save(String fileName) throws IOException
-{
-	FileOutputStream fos = new FileOutputStream(fileName); 
-	ObjectOutputStream oos = new ObjectOutputStream(fos); 
-	oos.writeObject(this); 
-	oos.flush(); 
-	oos.close(); 
-	System.out.println("Saved!");
-}
-	//load members
-
-public static MemberList load(String fileName) throws IOException, ClassNotFoundException
-{
-	System.out.println("Loading");
-	FileInputStream fis = new FileInputStream(fileName);
-	ObjectInputStream ois = new ObjectInputStream(fis);
-	MemberList m1 = (MemberList) ois.readObject();
-	ois.close();
-	
-	return m1;
-}
-@Override
-public int compareTo(Member arg0) {
-	// TODO Auto-generated method stub
-	return 0;
-}
-
+	if(!found) {
+		Interest newI = new Interest(interest, interestLevel);
+		interestList.add(newI);
+	}
+   }
+   
+   public String getName()
+   {
+	   return name;
+   }
+   
+   public int getYear() { return year;}
+   
+   public int getScore()
+   {
+	   return score;
+   }
+   
+   
+   public int calculateCompatability(Member m2)
+   {
+	   
+	   int sum = 0;
+	   
+	   for( Interest i : m2.interestList) 
+	   {
+		   
+		   boolean found = false;
+		   
+		 for (Interest i2 : this.interestList)
+		 {
+			 if(i.getTopic().equalsIgnoreCase(i2.getTopic())) 
+			 {
+				 sum = sum + (i.getTopicInterest() * i2.getTopicInterest());
+				 found = true;
+			 }
+		 } 
+		if(found = false)
+		{
+			sum = sum + ( i.getTopicInterest() / 2 );
+		}
+			 
+		 }
+	  
+	   return sum;
+	  
+   }
+   
+   public void orderList()
+   {
+	   for(Member match : this.top5)
+	   {
+		   match.getScore(); 
+	   }
+   }
 }
