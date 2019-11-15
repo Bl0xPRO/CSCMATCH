@@ -9,11 +9,13 @@ public class Member implements Serializable
 
     public int year;
     
+    public int score;
+    
 	Scanner kb = new Scanner(System.in);
     
 	LinkedList<Interest> interestList = new LinkedList<Interest>();
 	LinkedList<Member> memberList = new LinkedList<Member>();
-	LinkedList<Member> topFive = new LinkedList<Member>();
+	ArrayOrderedList<Member> top5 = new ArrayOrderedList<Member>();
 	
     public Member (String name, int year) 
 
@@ -21,6 +23,7 @@ public class Member implements Serializable
 
     	this.name = name;
     	this.year = year;
+    	this.score = -1000;
 
     }
 
@@ -34,23 +37,20 @@ public class Member implements Serializable
    
    public void addInterest(String topic, int topicInterest)
   {
+	   boolean found = false;
 	for(Interest in : interestList)
 	{
+		
 		if(topic.equalsIgnoreCase(in.getTopic()))
 		{
-			in.changeTopicIntrest(topicInterest);
+			found = true;
+			in.changeTopicInterest(topicInterest);	
 		}
 	}
-   }
-   
-   public void printInterestList () 
-   
-   {
-   
-   String interestCollection = "";
-   
-   int b
-   
+	if(!found) {
+		Interest newI = new Interest(topic, topicInterest);
+		interestList.add(newI);
+	}
    }
    
    public String getName()
@@ -59,6 +59,11 @@ public class Member implements Serializable
    }
    
    public int getYear() { return year;}
+   
+   public int getScore()
+   {
+	   return score;
+   }
    
    
    public int calculateCompatability(Member m2)
@@ -87,8 +92,14 @@ public class Member implements Serializable
 		 }
 	  
 	   return sum;
+	  
    }
    
-   
-   
+   public void oderList()
+   {
+	   for(Member match : this.top5)
+	   {
+		   match.getScore(); 
+	   }
+   }
 }
