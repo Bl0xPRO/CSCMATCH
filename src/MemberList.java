@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 public class MemberList implements Iterable<Member>, Serializable
 
-{	//Create List for members
+{	static //Create List for members
 	//add save and load method for memberList
 	LinkedList<Member> memberList = new LinkedList<Member>();
 	
@@ -38,11 +38,11 @@ public Member existingMember(String name)
 		
 		return found;
 	}
-public void removeMember()
+public static void removeMember(Member m)
 {
 	memberList.remove();
 }
-	//save file (Taken from POS)
+	//save file
 public void save(String fileName) throws IOException
 {
 	FileOutputStream fos = new FileOutputStream(fileName); 
@@ -51,7 +51,7 @@ public void save(String fileName) throws IOException
 	oos.flush(); 
 	oos.close(); 
 }
-	//load members (Taken from POS)
+	//load members
 public static MemberList load(String fileName) throws IOException, ClassNotFoundException
 {
 	FileInputStream fis = new FileInputStream(fileName);
