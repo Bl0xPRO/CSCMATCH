@@ -27,11 +27,11 @@ public class Interest
 		this.topic = topic;
 	}
 	
-	public void enterTopicIntrest(int TopicIntrest) {
+	public void enterTopicInterest(int TopicInterest) {
 		
 		//System.out.println("Enter topic Intrest level: ");
 		//TopicIntrest = scnr.nextInt();
-		this.topicInterest = TopicIntrest;
+		this.topicInterest = TopicInterest;
 	}
 	
 	public void changeTopicName(String topic) {
@@ -41,11 +41,11 @@ public class Interest
 		this.topic = topic;
 	}
 	
-	public void changeTopicIntrest(int TopicIntrest) {
+	public void changeTopicInterest(int TopicInterest) {
 		
 		//System.out.println("What would you like to change the Intrest level to?: ");
 		//TopicIntrest = scnr.nextInt();
-		this.topicInterest = TopicIntrest;
+		this.topicInterest = TopicInterest;
 	}
 	public String getTopic()
 	{
