@@ -1,105 +1,73 @@
-import java.io.Serializable;
-import java.util.Scanner;
-import java.util.LinkedList;
+import java.util.LinkedList;	
+import java.util.Iterator;
+import java.util.*;
+import java.io.*;
+public class MemberList implements Iterable<Member>, Serializable, Comparable<Member>
 
-public class Member implements Serializable
-
-{
-    public String name;
-
-    public int year;
-    
-    public int score;
-    
-	Scanner kb = new Scanner(System.in);
-    
-	LinkedList<Interest> interestList = new LinkedList<Interest>();
+{	static //Create List for members
+	//add save and load method for memberList
 	LinkedList<Member> memberList = new LinkedList<Member>();
-	ArrayOrderedList<Member> top5 = new ArrayOrderedList<Member>();
 	
-    public Member (String name, int year) 
-
-    {
-
-    	this.name = name;
-    	this.year = year;
-    	this.score = -1000;
-
-    }
-
-   public void changeName(String name) {
-	   this.name = name;
-   }
-   
-   public void changeYear(int year) {
-	   this.year = year;
-   }
-   
-   public void addInterest(String topic, int topicInterest)
-  {
-	   boolean found = false;
-	for(Interest in : interestList)
-	{
+public void addMember(String name, int year) 
+{
+	//Create member object with parameters for name and year
+	//If Member name is unique then add, if not then change name
+	Member M = new Member(name, year);
 		
-		if(topic.equalsIgnoreCase(in.getTopic()))
-		{
-			found = true;
-			in.changeTopicInterest(topicInterest);	
-		}
+	memberList.add(M);
+		
+		
 	}
-	if(!found) {
-		Interest newI = new Interest(topic, topicInterest);
-		interestList.add(newI);
+	// Instantiate iterator and get its methods
+public Iterator<Member> iterator() 	
+	{
+		return memberList.iterator();
 	}
-   }
-   
-   public String getName()
-   {
-	   return name;
-   }
-   
-   public int getYear() { return year;}
-   
-   public int getScore()
-   {
-	   return score;
-   }
-   
-   
-   public int calculateCompatability(Member m2)
-   {
-	   
-	   int sum = 0;
-	   
-	   for( Interest i : m2.interestList) 
-	   {
-		   
-		   boolean found = false;
-		   
-		 for (Interest i2 : this.interestList)
-		 {
-			 if(i.getTopic().equalsIgnoreCase(i2.getTopic())) 
-			 {
-				 sum = sum + (i.getTopicInterest() * i2.getTopicInterest());
-				 found = true;
-			 }
-		 } 
-		if(found = false)
+	//add method for comparing unique name using for each 
+public Member existingMember(String name)
+{
+	Member found = null;
+	
+	for(Member m: memberList)
 		{
-			sum = sum + ( i.getTopicInterest() / 2 );
+			if(name.equals(m.getName()))
+			{
+				found = m;
+			}
 		}
-			 
-		 }
-	  
-	   return sum;
-	  
-   }
-   
-   public void oderList()
-   {
-	   for(Member match : this.top5)
-	   {
-		   match.getScore(); 
-	   }
-   }
+		
+		return found;
+	}
+public static void removeMember(Member m)
+{
+	memberList.remove();
+}
+	//save file
+public void save(String fileName) throws IOException
+{
+	FileOutputStream fos = new FileOutputStream(fileName); 
+	ObjectOutputStream oos = new ObjectOutputStream(fos); 
+	oos.writeObject(this); 
+	oos.flush(); 
+	oos.close(); 
+	System.out.println("Saved!");
+}
+	//load members
+
+public static MemberList load(String fileName) throws IOException, ClassNotFoundException
+{
+	System.out.println("Loading");
+	FileInputStream fis = new FileInputStream(fileName);
+	ObjectInputStream ois = new ObjectInputStream(fis);
+	MemberList m1 = (MemberList) ois.readObject();
+	ois.close();
+	
+	return m1;
+}
+@Override
+public int compareTo(Member arg0) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
 }
