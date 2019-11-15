@@ -43,6 +43,16 @@ public class Member implements Serializable
 	}
    }
    
+   public void printInterestList () 
+   
+   {
+   
+   String interestCollection = "";
+   
+   int b
+   
+   }
+   
    public String getName()
    {
 	   return name;
