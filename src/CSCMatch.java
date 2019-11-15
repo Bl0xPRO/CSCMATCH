@@ -3,11 +3,11 @@
     Description:
     Date: 11/14/19
  */
-import java.io.File;
+import java.io.*;
 import java.io.IOException;
 import java.util.*;
 
-public class CSCMatch
+public class CSCMatch implements Serializable
 {
 
     public static void main(String[] args)
@@ -19,14 +19,14 @@ public class CSCMatch
         System.out.println("Input [regress] to return to menu.");
         //User Menu
         System.out.println("User Menu\n");
-        System.out.println("Load Members [1]");
-        System.out.println("Save Members [2]");
-        System.out.println("List All the Members [3]");
-        System.out.println("Add a Member [4]");
-        System.out.println("Remove a Member [5]");
-        System.out.println("List Member [6]");
-        System.out.println("Add an Interest to a Member [7]");
-        System.out.println("Quit [8]");
+        System.out.println("[1] Load the Members");
+        System.out.println("[2] Save the Members");
+        System.out.println("[3] List All the Members");
+        System.out.println("[4] Add a Member");
+        System.out.println("[5] Remove a Member");
+        System.out.println("[6] List Member");
+        System.out.println("[7] Add an Interest to a Member");
+        System.out.println("[8] Quit");
 
         //add membership object
         MemberList membership = new MemberList();
@@ -97,9 +97,9 @@ public class CSCMatch
                         {
                             System.out.println("File was found.");
 
-                            membership = MemberList.load(fileCheck);
+                            MemberList.load(fileCheck);
 
-                            System.out.println("Members Loaded");
+                            System.out.println("Member Loaded.");
 
                         }
 
@@ -118,8 +118,10 @@ public class CSCMatch
                         String fileName = file1.next();
 
                         File  loadingFile = new File(fileName);
+                        
+                        membership.save(fileName);
 
-                        if (!loadingFile.canWrite())
+                       /* if (!loadingFile.canWrite())
 
                         {
 
@@ -133,7 +135,7 @@ public class CSCMatch
 
                         membership.save(fileName);
 
-                    }
+                    }*/
                         break;
 
 
@@ -158,10 +160,6 @@ public class CSCMatch
                             if (allMembers.getYear() == 5) { Grade = "Graduated";}
 
                             System.out.println(allMembers.getName() + ": " + Grade);
-
-                            //    System.out.println(allMembers.printInterestList());  I want this thing to print out the numbered list of interests
-
-
 
                         }
 
@@ -254,7 +252,7 @@ public class CSCMatch
 
                         } while (m == null);
 
-                        membership.removeMember(m);
+                        MemberList.removeMember(m);
 
                         break;
 
@@ -275,10 +273,32 @@ public class CSCMatch
                             idName = kb3.nextLine();
 
 
-                            if (membership.existingMember(idName) != null)  // generic test for listing member as well
+                            //if (membership.existingMember(idName) != null)  // generic test for listing member as well
 
                             {
-                                System.out.println("Member found.");
+                            
+                            	for(Member m1 : membership)
+                            	{
+                            		if(m1.getName().equalsIgnoreCase(idName))
+                            		{
+                                
+                            	System.out.println("Member found.");
+                                for(Member m2 : membership)
+                                {
+                                	m2.score = m1.calculateCompatability(m2);
+                                	m1.top5.add(m2);
+                                }
+                            		}
+                            		else
+                            		{
+                            		System.out.println("No member found.");
+                            		return;
+                            		}
+                               for(Member matches: m1.top5 )
+                               {
+                            	   System.out.println(matches);
+                               }
+                            	}
                             }
 
                         }
@@ -294,54 +314,42 @@ public class CSCMatch
 
                         Scanner kb4 = new Scanner(System.in);
 
-                        String interestName = "";
+                        String newName = "";
 
                         do {
 
-                            System.out.print("\nEnter Name of Member to add Interest to:");
+                            System.out.print("\nEnter Name of the member:");
 
-                            interestName = kb4.nextLine();
+                            newName = kb4.nextLine();
 
-
-                            if (membership.existingMember(interestName) == null)  // generic test for listing member as well
-
-                            {
-                                System.out.println("Member was not found.");
+                            for(Member findMem : membership)
+                            if(findMem.getName().equalsIgnoreCase(newName))	
+                            { 
+                            	try
+                            	{
+                            	System.out.println("Enter name of interest");
+                            	Scanner kb5 = new Scanner(System.in);
+                            	
+                            	String newInterest = kb5.nextLine();
+                            	
+                            	Scanner kb6 = new Scanner(System.in); 
+                            	System.out.println("Enter the level of interest. 1- 10");
+                            	
+                            	int interestLevel = kb6.nextInt();
+                            	
+                            	findMem.addInterest(newInterest, interestLevel);
+                            	}
+                            	catch (InputMismatchException e) {}
                             }
-
-                            else if (interestName.contains("regress")); {break;}
-
-                        }
-
-                        while (membership.existingMember(interestName) == null);
-
-                        try {
-
-                            Scanner kb5 = new Scanner(System.in);
-
-                            System.out.print("Please Enter Name of interest:");
-
-                            String interest = kb5.nextLine();
-
-                        }
-
-                        catch (InputMismatchException e) {}
-
-                        try {
-
-                            Scanner kb6 = new Scanner(System.in);
-
-                            System.out.print("Please Enter Level of interest 1 - 10:");
-
-                            int interestLevel = kb6.nextInt();
-
-                        } catch (InputMismatchException e) {}
-
-
-                       // membership.addInterest(interest, interestLevel);
-
-
-                        break;
+                            else
+                            {
+                            	System.out.println("That member does not exist.");
+                            }
+                          }	
+                        while (membership.existingMember(newName) != null);
+                        
+                            	
+                            	break;
 
 
                     case 8:
@@ -351,10 +359,11 @@ public class CSCMatch
                         //else if ()
 
                         {
-
+                        
                             System.out.println("Thank you for using CSC Match.");
 
                             System.exit(0);
+                            System.out.println();
 
                         }
                 }
@@ -372,21 +381,14 @@ public class CSCMatch
 
             {
                 System.out.println("Please enter a number 1-8");
-            }
-
-        catch (IOException e)
-
-        {
+            } catch (IOException e) {
                 e.printStackTrace();
-            }
-
-        catch (ClassNotFoundException e)
-
-        {
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
         work = false;
+    
+    }
     }
 
-}
