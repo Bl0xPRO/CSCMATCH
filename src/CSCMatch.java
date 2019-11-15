@@ -4,6 +4,7 @@
     Date: 11/14/19
  */
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class CSCMatch
@@ -15,6 +16,7 @@ public class CSCMatch
         System.out.println("Welcome to CSC Match, the Java program for finding matches with fellow CSC students!");
         System.out.println("Please use the menu below to navigate the user database. \n");
         System.out.println("Enter one number to select your option");
+        System.out.println("Input [regress] to return to menu.");
         //User Menu
         System.out.println("User Menu\n");
         System.out.println("Load the Members [1]");
@@ -24,7 +26,7 @@ public class CSCMatch
         System.out.println("Remove a Member [5]");
         System.out.println("List Member [6]");
         System.out.println("Add an Interest to a Member [7]");
-        System.out.println("Quit [8]\n");
+        System.out.println("Quit [8]");
 
         //add membership object
         MemberList membership = new MemberList();
@@ -36,37 +38,42 @@ public class CSCMatch
         boolean work = true;
 
         while(work)
+
             try
+
             {
                 Scanner in = new Scanner(System.in);
 
-                System.out.print("Select: ");
+                System.out.print("\nMenu Select: ");
 
                 select = in.nextInt();
+
                 if(select > 8) //Instructs user to enter correct input
+
                 {
+
                     System.out.println("Enter a number 1-8");
                     System.out.println();
                     select = in.nextInt();
+
                 }
 
                 switch(select)
 
                 {
+
                     case 1:
+
                         Scanner file = new Scanner(System.in);
 
 
                         System.out.println("Please enter filename to load from.");
 
-
-                        System.out.print("Input: ");
+                        System.out.print("File Input: ");
 
                         String fileCheck = file.next();
 
-                        File  userFile = new File(fileCheck);
-
-                        if (fileCheck.contains("Return to Menu"))
+                        if (fileCheck.contains("regress"))
 
                         {
 
@@ -74,17 +81,30 @@ public class CSCMatch
 
                         }
 
-                        else if(!userFile.exists())
+                        File  userFile = new File(fileCheck);
+
+
+                        if(!userFile.exists())
 
                         {
 
-                            System.out.println("That file was not found, please enter another file.");
+                            System.out.println("That file was not found, please review file and retry option from menu.");
+
                         }
+
                         else if (userFile.exists())
+
                         {
                             System.out.println("File was found.");
+
+                            membership = MemberList.load(fileCheck);
+
+
                         }
+
                         break;
+
+
 
                     case 2:
 
@@ -94,41 +114,52 @@ public class CSCMatch
 
                         System.out.print("Input: ");
 
-                        String fileCheck1 = file1.next();
+                        String fileName = file1.next();
 
-                        File  userFile1 = new File(fileCheck1);
+                        File  loadingFile = new File(fileName);
 
-                        if (fileCheck1.contains("Return to Menu"))
-
+                        if (!loadingFile.canWrite())
 
                         {
 
-                            break;
+                            System.out.println ("File cannot be written to. Please review file or enter other file from menu.");
 
                         }
 
+                        else if (loadingFile.canWrite())
 
-                        else if(!userFile1.exists())
                         {
-                            System.out.println("That file was not found, please enter another file.");
-                        }
-                        else if (userFile1.exists())
-                        {
-                            System.out.println("File was found.");
 
-                        }
+                        membership.save(fileName);
 
+                    }
                         break;
 
 
                     case 3:
 
-                        System.out.println("Listing All Members");
-                       
+                        System.out.println("\nListing All Members\n");
+
                         for(Member allMembers : membership)
+
                         {
-                        	System.out.println(allMembers);
+
+                            String Grade = " ";
+
+                            if (allMembers.getYear() == 1) { Grade = "Freshman";}
+
+                            else if (allMembers.getYear() == 2) { Grade = "Sophmore";}
+
+                            else if (allMembers.getYear() == 3) { Grade = "Junior";}
+
+                            else if (allMembers.getYear() == 4) { Grade = "Senior";}
+
+                            if (allMembers.getYear() == 5) { Grade = "Graduated";}
+
+                            System.out.println(allMembers.getName() + ": " + Grade);
+
                         }
+
                         break;
 
 
@@ -140,11 +171,13 @@ public class CSCMatch
 
                         try {
 
+                            String name = "";
+
                             do {
 
-                                System.out.println("Enter new member name");
-                                String name = kb.nextLine();
+                                System.out.println("Enter new member name:"); // A member can have any name, so regress cannot apply here
 
+                                name = kb.nextLine();
 
                                 if (membership.existingMember(name) != null)  // generic test for listing member as well
 
@@ -152,29 +185,40 @@ public class CSCMatch
                                     System.out.println(" That Name is already Taken, please enter another.");
                                 }
 
-                            } while (membership.existingMember(name));
+                            } while (membership.existingMember(name) != null);
 
+                            int year;
 
-                            do {
+                            do
 
-                                System.out.println("Enter member year 1-5");    //Ensure that user input meets parameters
-                                int year = kb.nextInt();
+                                {
 
-                                if (year < 0 || year > 5) {
+                                System.out.println("Enter member year between 1-5");    //Ensure that user input meets parameters
+
+                                year = kb.nextInt();
+
+                                if (year < 0 || year > 5)
+
+                                {
+
                                     System.out.println("Please enter a year between 1 and 5.");
+
                                 }
 
-                            } while (year < 0 || year > 5);
+                            } while (year < 1 || year > 5);
 
-                                membership.addMember(name, year);
-                                System.out.println("");
-                            }
+                            membership.addMember(name, year);
+
+                            System.out.println("Member Successfully Added");
+                        }
 
 
                         catch(InputMismatchException e)
+
                         {
-                            System.out.println("Enter only integer values!");
+                            System.out.println("Only enter integer values.");
                         }
+
                         break;
 
 
@@ -182,22 +226,30 @@ public class CSCMatch
 
                         System.out.println("Removing Member");
 
+                        Scanner kb2 = new Scanner(System.in);
+
+                        String badName = "";
+
+                        Member m = null;
+
 
                         do {
 
-                            System.out.println("Name of Member to be removed.");
-                            String name = kb.nextLine();
+                            System.out.println("Enter Name of Member to be Removed.");
 
+                            badName = kb2.nextLine();
 
-                            if (membership.existingMember(name) == null)  // generic test for listing member as well
+                            m = membership.existingMember(badName);
+
+                            if (m == null)  // generic test for listing member as well
 
                             {
                                 System.out.println("That name is not in the database. Please enter existing member name.");
                             }
 
-                        } while (membership.existingMember(name));
+                        } while (m == null);
 
-                        membership.remove(name);
+                        membership.removeMember(m);
 
                         break;
 
@@ -206,23 +258,28 @@ public class CSCMatch
 
                         System.out.println("List Member");
 
+                        String idName = "";
+
+                        Scanner kb3 = new Scanner(System.in);
+
 
                         do {
 
-                            System.out.println("Enter new member name");
-                            String name = kb.nextLine();
+                            System.out.println("Enter Name of Member to be Listed:");
+
+                            idName = kb3.nextLine();
 
 
-                            if (membership.existingMember(name) != null)  // generic test for listing member as well
+                            if (membership.existingMember(idName) != null)  // generic test for listing member as well
 
                             {
-                                System.out.println(" That Name is already taken, please enter another.");
+                                System.out.println("Member found.");
                             }
 
-                        } while (membership.existingMember(name));
+                        }
 
+                        while (membership.existingMember(idName) != null);
 
-                        System.out.print("Input: ");
                         break;
 
 
@@ -230,29 +287,66 @@ public class CSCMatch
 
                         System.out.println("Add Interest to Member");
 
-                        System.out.println("Please Enter Member Name:");
+                        Scanner kb4 = new Scanner(System.in);
+
+                        String newName = "";
+
+                        do {
+
+                            System.out.print("\nEnter Name of Interest to be Added to Member:");
+
+                            newName = kb4.nextLine();
+
+
+                            if (membership.existingMember(newName) == null)  // generic test for listing member as well
+
+                            {
+                                System.out.println("");
+                            }
+
+                        }
+
+                        while (membership.existingMember(newName) == null);
 
                         break;
 
 
                     case 8:
 
-                        System.out.println("Thank you for using CSC Match.");
+                        //if () {}
 
-                        System.exit(0);
+                        //else if ()
 
-                        break;
+                        {
+
+                            System.out.println("Thank you for using CSC Match.");
+
+                            System.exit(0);
+
+                        }
                 }
+
+
             }
+
             catch (InputMismatchException e)
+
             {
                 System.out.println("Please enter a number 1-8");
             }
+
             catch(NoSuchElementException e)
+
             {
                 System.out.println("Please enter a number 1-8");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
+
         work = false;
     }
+
 
 }
