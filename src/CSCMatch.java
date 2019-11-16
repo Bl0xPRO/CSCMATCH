@@ -4,12 +4,11 @@
     Date: 11/14/19
  */
 import java.io.*;
-import java.io.IOException;
 import java.util.*;
 
 public class CSCMatch implements Serializable
 {
-
+   static MemberList membership = new MemberList();
     public static void main(String[] args)
     {
         //Introduction to the program
@@ -29,7 +28,7 @@ public class CSCMatch implements Serializable
         System.out.println("[8] Quit");
 
         //add membership object
-        MemberList membership = new MemberList();
+
 
         //Switch case menu
 
@@ -81,10 +80,10 @@ public class CSCMatch implements Serializable
 
                         }
 
-                        File  userFile = new File(fileCheck);
+                       // File  userFile = new File(fileCheck);
 
 
-                        if(!userFile.exists())
+                      /*  if(!userFile.exists())
 
                         {
 
@@ -97,12 +96,12 @@ public class CSCMatch implements Serializable
                         {
                             System.out.println("File was found.");
 
-                            MemberList.load(fileCheck);
+                        membership = MemberList.load(fileCheck);
 
                             System.out.println("Member Loaded.");
 
-                        }
-
+                        }*/
+                        membership = MemberList.load(fileCheck);
                         break;
 
 
@@ -117,11 +116,11 @@ public class CSCMatch implements Serializable
 
                         String fileName = file1.next();
 
-                        File  loadingFile = new File(fileName);
+                       // File  loadingFile = new File(fileName);
                         
                         membership.save(fileName);
 
-                       /* if (!loadingFile.canWrite())
+                     /*  if (!loadingFile.canWrite())
 
                         {
 
@@ -133,7 +132,7 @@ public class CSCMatch implements Serializable
 
                         {
 
-                        membership.save(fileName);
+                       save(fileName);
 
                     }*/
                         break;
@@ -282,22 +281,36 @@ public class CSCMatch implements Serializable
                             		if(m1.getName().equalsIgnoreCase(idName))
                             		{
                                 
-                            	System.out.println("Member found.");
-                                for(Member m2 : membership)
-                                {
-                                	m2.score = m1.calculateCompatability(m2);
-                                	m1.top5.add(m2);
-                                }
+		                            	System.out.println("Member found.");
+		                            	
+		                            	for(Interest iList : m1.interestList) {
+		                            		System.out.println(iList);
+		                            	}
+		                            	
+		                                for(Member m2 : membership)
+		                                {
+		                                	m2.score = m1.calculateCompatability(m2);
+		                                	Match newMatch = new Match(m2.getName(),m2.getScore());
+		                                	m1.addMatch(newMatch);
+		                                }
+                            		
+		                      
+		                                if(m1.top5.isEmpty() == false)
+		                                {
+		                                	for( int i = 0; i < 5; i++)
+			                                {
+			                                	//System.out.println(m1.top5.get(i).getMatchName());
+			                                	
+			                                }
+		                                }
                             		}
+                           
                             		else
                             		{
                             		System.out.println("No member found.");
                             		return;
                             		}
-                               for(Member matches: m1.top5 )
-                               {
-                            	   System.out.println(matches);
-                               }
+                               
                             	}
                             }
 
@@ -338,6 +351,7 @@ public class CSCMatch implements Serializable
                             	int interestLevel = kb6.nextInt();
                             	
                             	findMem.addInterest(newInterest, interestLevel);
+                            	System.out.println("Interest added! ");
                             	}
                             	catch (InputMismatchException e) {}
                             }
@@ -390,5 +404,9 @@ public class CSCMatch implements Serializable
         work = false;
     
     }
+    
+
+    
     }
+
 
