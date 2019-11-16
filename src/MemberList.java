@@ -2,11 +2,11 @@ import java.util.LinkedList;
 import java.util.Iterator;
 import java.util.*;
 import java.io.*;
-public class MemberList implements Iterable<Member>, Serializable
+public class MemberList implements Iterable<Member>, Serializable, Comparable<Member>
 
-{	static //Create List for members
+{	//Create List for members
 	//add save and load method for memberList
-	LinkedList<Member> memberList = new LinkedList<Member>();
+	static LinkedList<Member> memberList = new LinkedList<Member>();
 	
 public void addMember(String name, int year) 
 {
@@ -47,19 +47,48 @@ public void save(String fileName) throws IOException
 {
 	FileOutputStream fos = new FileOutputStream(fileName); 
 	ObjectOutputStream oos = new ObjectOutputStream(fos); 
+	
+	
+	
+	if (memberList.isEmpty()) {
+		System.out.println("The list is empty");
+	}
+	
+	for ( Member x : memberList) {
+		System.out.println(" - " + x.getName());
+	}
+	
+	
+	
 	oos.writeObject(this); 
 	oos.flush(); 
 	oos.close(); 
+	System.out.println("Saved!");
 }
 	//load members
+
 public static MemberList load(String fileName) throws IOException, ClassNotFoundException
 {
+	System.out.println("Loading");
 	FileInputStream fis = new FileInputStream(fileName);
 	ObjectInputStream ois = new ObjectInputStream(fis);
-	MemberList ml = (MemberList) ois.readObject();
+	MemberList m1 = (MemberList) ois.readObject();
 	ois.close();
-		
-	return ml;
+	if (memberList.isEmpty()) {
+		System.out.println("The list is empty");
+	}
+	
+	for ( Member x : memberList) {
+		System.out.println(" - " + x.getName());
+	}
+	
+	
+	return m1;
+}
+@Override
+public int compareTo(Member arg0) {
+	// TODO Auto-generated method stub
+	return 0;
 }
 
 }
