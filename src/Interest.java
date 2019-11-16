@@ -1,15 +1,18 @@
+import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Interest
+public class Interest implements Serializable
 {
 //public Interest (String topic, int topicInterest)
 	
 	//NOTES
 	/* I was told to use scanner so I did but 
-	 * In case we change that I commented out diffrent uses
+	 * In case we change that I commented out different uses
 	 * I also used print line we can remove it if thats not something we want. 
 	 * 
 	 */
+	LinkedList<Interest> interestList = new LinkedList<Interest>(); 
 	
 	//Variables
 	public String topic;
@@ -18,6 +21,10 @@ public class Interest
 	//Scanner = scnr
 	//Scanner scnr = new Scanner(System.in);	
 	
+	public Interest(String t, int l) {
+		this.topic = t;
+		this.topicInterest = l;
+	}
 	
 	//Methods below
 	public void enterTopicName(String topic) {
