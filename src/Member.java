@@ -15,7 +15,7 @@ public class Member implements Serializable
     
 	LinkedList<Interest> interestList = new LinkedList<Interest>();
 	LinkedList<Member> memberList = new LinkedList<Member>();
-	LinkedList<Member> top5 = new LinkedList<Member>();
+	LinkedList<Match> top5 = new LinkedList<Match>();
 	
     public Member (String name, int year) 
 
@@ -91,15 +91,37 @@ public class Member implements Serializable
 			 
 		 }
 	  
-	   return sum;
-	  
+	  return sum;
    }
    
-   public void orderList()
+   public void addMatch(Match newMatch)
    {
-	   for(Member match : this.top5)
-	   {
-		   match.getScore(); 
+	   Match top;
+	   int index = 0;
+	   if (top5.isEmpty()) {
+		   top5.add(newMatch);
 	   }
+	   else
+	   {
+		   top = top5.getFirst();
+		   
+		   while(index < top5.size()) {
+			   
+		   if(top.getcompScore() > newMatch.getcompScore())
+		   {
+			top5.add(index, newMatch); 
+		   }
+		   else if(index == top5.size() - 1)
+		   {
+			top5.add(newMatch);
+		   }
+		   else
+		   {
+			   index ++;
+			   top = top5.get(index);
+		   }
+		 }
+	   }
+	
    }
 }
