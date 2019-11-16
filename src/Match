@@ -1,0 +1,22 @@
+import java.io.Serializable;
+
+public class Match implements Serializable
+{
+	public String matchName;
+	public int compScore;
+	
+	public Match (String matchName, int compScore)
+	{
+		this.matchName = matchName;
+		this.compScore = compScore;
+	}
+	
+	public String getMatchName() {
+		return matchName;
+	}
+	
+	public int getcompScore() {
+		return compScore;
+	}
+	
+}
