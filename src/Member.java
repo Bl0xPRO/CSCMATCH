@@ -11,7 +11,7 @@ public class Member implements Serializable
     
     public int score;
     
-	Scanner kb = new Scanner(System.in);
+	transient Scanner kb = new Scanner(System.in);
     
 	LinkedList<Interest> interestList = new LinkedList<Interest>();
 	LinkedList<Member> memberList = new LinkedList<Member>();
