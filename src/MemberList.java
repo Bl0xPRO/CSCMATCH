@@ -6,7 +6,7 @@ public class MemberList implements Iterable<Member>, Serializable, Comparable<Me
 
 {	//Create List for members
 	//add save and load method for memberList
-	static LinkedList<Member> memberList = new LinkedList<Member>();
+	LinkedList<Member> memberList = new LinkedList<Member>();
 	
 public void addMember(String name, int year) 
 {
@@ -38,7 +38,7 @@ public Member existingMember(String name)
 		
 		return found;
 	}
-public static void removeMember(Member m)
+public void removeMember(Member m)
 {
 	memberList.remove();
 }
@@ -74,11 +74,11 @@ public static MemberList load(String fileName) throws IOException, ClassNotFound
 	ObjectInputStream ois = new ObjectInputStream(fis);
 	MemberList m1 = (MemberList) ois.readObject();
 	ois.close();
-	if (memberList.isEmpty()) {
+	if (m1.memberList.isEmpty()) {
 		System.out.println("The list is empty");
 	}
 	
-	for ( Member x : memberList) {
+	for ( Member x : m1) {
 		System.out.println(" - " + x.getName());
 	}
 	
