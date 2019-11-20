@@ -343,12 +343,26 @@ public class CSCMatch implements Serializable
                             	
                             	Scanner kb6 = new Scanner(System.in); 
                             	System.out.println("Enter the level of interest. 0 - 10");
-                            	
-                            	int interestLevel = kb6.nextInt();
-                            	
-                            	findMem.addInterest(newInterest, interestLevel);
-                            	System.out.println("Interest added! ");
-                            	}
+                            	 boolean valid = false;
+                                       
+				       while(!valid)
+                                       { 
+                                    	int interestLevel = kb6.nextInt();
+                                    	   
+                                    	   if(interestLevel >= 0 && interestLevel <=10)
+                                    	   {
+                                    	   	   findMem.addInterest(newInterest, interestLevel);
+		                                   System.out.println("Interest added! ");    
+		                                   valid = true;
+                                    	   }
+                                    	   else
+                                    	   {
+                                    		   System.out.println("Not valid, enter input again");
+                                    	   }
+                                    		   
+                                       }  
+                                        save = 1; 
+					
                             	catch (InputMismatchException e) {}
                             }
                           if(found == false)
