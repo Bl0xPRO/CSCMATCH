@@ -260,12 +260,12 @@ public class CSCMatch implements Serializable
                             //if (membership.existingMember(idName) != null)  // generic test for listing member as well
 
                             {
-                            
+                            	boolean listFound = false;
                             	for(Member m1 : membership)
                             	{
                             		if(m1.getName().equalsIgnoreCase(idName))
                             		{
-                                
+                            			listFound = true;
 		                            	System.out.println("Member found.");
 		                            	
 		                            	System.out.println();
@@ -291,20 +291,21 @@ public class CSCMatch implements Serializable
 		                                {
 		                                	for( int i = 0; i < 5; i++)
 			                                {
-			                                	//System.out.println(m1.top5.get(i).getMatchName());
+			                                	System.out.println(m1.top5.get(i).getMatchName());
 			                                	
 			                                }
 		                                }
-                            		}
-                           
-                            		else
-                            		{
-                            		System.out.println("No member found.");
-                            		return;
-                            		}
-                            		
+		                                else {
+		                                	System.out.println("Matches list is empty");
+		                                }
+                            		}                            
                                
                             	}
+                            if (listFound == true)
+                            {
+                            	System.out.println("No member found");
+                            	return;
+                            }
                             }
 
                         }
@@ -404,5 +405,4 @@ public class CSCMatch implements Serializable
 
     
     }
-
 
