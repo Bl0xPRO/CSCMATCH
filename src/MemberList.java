@@ -54,11 +54,6 @@ public void save(String fileName) throws IOException
 		System.out.println("The list is empty");
 	}
 	
-	for ( Member x : memberList) {
-		System.out.println(" - " + x.getName());
-	}
-	
-	
 	
 	oos.writeObject(this); 
 	oos.flush(); 
@@ -69,7 +64,7 @@ public void save(String fileName) throws IOException
 
 public static MemberList load(String fileName) throws IOException, ClassNotFoundException
 {
-	System.out.println("Loading");
+	
 	FileInputStream fis = new FileInputStream(fileName);
 	ObjectInputStream ois = new ObjectInputStream(fis);
 	MemberList m1 = (MemberList) ois.readObject();
@@ -77,11 +72,10 @@ public static MemberList load(String fileName) throws IOException, ClassNotFound
 	if (m1.memberList.isEmpty()) {
 		System.out.println("The list is empty");
 	}
-	
-	for ( Member x : m1) {
-		System.out.println(" - " + x.getName());
+	else
+	{
+		System.out.println("File Loaded");
 	}
-	
 	
 	return m1;
 }
