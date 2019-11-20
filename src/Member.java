@@ -101,27 +101,31 @@ public class Member implements Serializable
 	   if (top5.isEmpty()) {
 		   top5.add(newMatch);
 	   }
-	   else
+	  else
 	   {
 		   top = top5.getFirst();
 		   
-		   while(index < top5.size()) {
+		   while(index < top5.size()) 
+		   {
 			   
-		   if(top.getcompScore() > newMatch.getcompScore())
-		   {
-			top5.add(index, newMatch); 
+			   if(top == top5.getLast() && top.getcompScore() <= newMatch.getcompScore())
+			   {
+				   top5.add(index, newMatch);
+				   break;
+			   } else if (top == top5.getLast() && top.getcompScore() > newMatch.getcompScore()) {
+				   top5.addLast(newMatch);
+			   }
+			   else if(top.getcompScore() <= newMatch.getcompScore())
+			   {
+				top5.add(index, newMatch); 
+				break;
+			   }
+			   else if(top.getcompScore() > newMatch.getcompScore())
+			   {
+				index++ ;
+				top5.get(index);
+				break;
 		   }
-		   else if(index == top5.size() - 1)
-		   {
-			top5.add(newMatch);
-		   }
-		   else
-		   {
-			   index ++;
-			   top = top5.get(index);
-		   }
-		 }
-	   }
 	
    }
 }
