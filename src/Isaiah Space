@@ -183,6 +183,11 @@ public class CSCMatch implements Serializable
                                 {
                                     System.out.println(" That Name is already Taken, please enter another.");
                                 }
+                                
+                                else if (name.contains("regress"))
+                                {
+                                    break;
+                                }
 
                             } while (membership.existingMember(name) != null);
 
