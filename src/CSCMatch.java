@@ -315,7 +315,7 @@ public class CSCMatch implements Serializable
                         break;
 
 
-                    case 7:
+                  case 7:
 
                         System.out.println("Add Interest to Member");
 
@@ -337,34 +337,32 @@ public class CSCMatch implements Serializable
                             	try
                             	{
                             	System.out.println("Enter name of interest");
-                            	Scanner kb5 = new Scanner(System.in);
+                            	String newInterest = kb4.nextLine();
                             	
-                            	String newInterest = kb5.nextLine();
-                            	
-                            	Scanner kb6 = new Scanner(System.in); 
-                            	System.out.println("Enter the level of interest. 0 - 10");
+                            	  System.out.println("Enter the level of interest. 0 - 10");
                             	 boolean valid = false;
-                                       
-				       while(!valid)
-                                       { 
-                                    	int interestLevel = kb6.nextInt();
-                                    	   
-                                    	   if(interestLevel >= 0 && interestLevel <=10)
-                                    	   {
-                                    	   	   findMem.addInterest(newInterest, interestLevel);
-		                                   System.out.println("Interest added! ");    
-		                                   valid = true;
-                                    	   }
-                                    	   else
-                                    	   {
-                                    		   System.out.println("Not valid, enter input again");
-                                    	   }
-                                    		   
-                                       }  
-                                        save = 1; 
-					
-                            	catch (InputMismatchException e) {}
-                            }
+                                 while(!valid)
+                                 { 
+                              	int interestLevel = kb4.nextInt();
+                              	   
+                              	   if(interestLevel >= 0 && interestLevel <=10)
+                              	   {
+                              	   findMem.addInterest(newInterest, interestLevel);
+	                                   System.out.println("Interest added! ");    
+	                                   valid = true;
+                              	   }
+                              	   else
+                              	   {
+                              		   System.out.println("Not valid, enter input again");
+                              		
+                              	   }
+                                    
+                                 }  
+                            	}
+                            	catch (InputMismatchException e) {
+                            		
+                            	}
+                            } kb4.nextLine();
                           if(found == false)
                           {
                         	  System.out.println("Member was not found.");
@@ -375,6 +373,7 @@ public class CSCMatch implements Serializable
                         
                             	
                             	break;
+                
 
 
                     case 8:
