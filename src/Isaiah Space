@@ -155,6 +155,8 @@ public class CSCMatch implements Serializable
 
                             System.out.println(allMembers.getName() + ": " + Grade);
 
+                            System.out.print("");
+
                         }
 
                         break;
@@ -194,13 +196,15 @@ public class CSCMatch implements Serializable
 
                                 System.out.println(" 1 = Freshman");
 
-                                System.out.println(" 2 = Sophmore");
+                                System.out.println(" 2 = Sophomore");
 
                                 System.out.println(" 3 = Junior");
 
                                 System.out.println(" 4 = Senior");
 
                                 System.out.println(" 5 = Graduated");
+
+                                System.out.println("Enter year:");
 
 
                                 year = kb.nextInt();
@@ -257,6 +261,8 @@ public class CSCMatch implements Serializable
 
                                 System.out.println("Returning to Menu");
 
+                                break;
+
                             }
 
                             else if (m == null)  // generic test for listing member as well
@@ -267,9 +273,16 @@ public class CSCMatch implements Serializable
 
                         } while (m == null);
 
-                        membership.removeMember(m);
+                       // membership.removeMember(m);
 
-                        save = 1;
+                        if (!badName.contains("regress")) {
+
+                            membership.removeMember(m);
+
+                            System.out.println("Member removed.");
+
+                            save = 1;
+                        }
 
                         break;
 
@@ -328,7 +341,7 @@ public class CSCMatch implements Serializable
                                         {
                                             for( int i = 0; i < 5; i++)
                                             {
-                                                //System.out.println(m1.top5.get(i).getMatchName());
+                                                System.out.println(m1.top5.get(i).getMatchName());
 
                                             }
                                         }
@@ -371,42 +384,48 @@ public class CSCMatch implements Serializable
 
                                 if (newName.contains("regress"))
                                 {
-
                                     System.out.println("Returning to Menu");
 
                                     break;
-
                                 }
 
-                                else if(findMem.getName().equalsIgnoreCase(newName))
+                                else if(findMem.getName().equals(newName))
                                 {
                                     found = true;
                                     try
                                     {
                                         System.out.println("Enter name of interest");
-                                        Scanner kb5 = new Scanner(System.in);
+                                        String newInterest = kb4.nextLine();
 
-                                        String newInterest = kb5.nextLine();
-
-                                        Scanner kb6 = new Scanner(System.in);
                                         System.out.println("Enter the level of interest. 0 - 10");
+                                        boolean valid = false;
+                                        while(!valid)
+                                        {
+                                            int interestLevel = kb4.nextInt();
 
-                                        int interestLevel = kb6.nextInt();
+                                            if(interestLevel >= 0 && interestLevel <=10)
+                                            {
+                                                findMem.addInterest(newInterest, interestLevel);
+                                                System.out.println("Interest added! ");
+                                                valid = true;
+                                                save= 1;
+                                            }
+                                            else
+                                            {
+                                                System.out.println("Not valid, enter input again");
 
-                                        findMem.addInterest(newInterest, interestLevel);
-                                        System.out.println("Interest added! ");
+                                            }
 
-                                        save = 1;
+                                        }
+                                    }
+                                    catch (InputMismatchException e) {
 
                                     }
-                                    catch (InputMismatchException e) {}
-                                }
+                                } kb4.nextLine();
 
-                            else if(found == false)
+                            if(found == false)
                             {
                                 System.out.println("Member was not found.");
-
-                                break;
                             }
                         }
 
@@ -414,7 +433,6 @@ public class CSCMatch implements Serializable
 
 
                         break;
-
 
                     case 8:
 
@@ -436,6 +454,7 @@ public class CSCMatch implements Serializable
                                 System.out.println("Thank you for using CSC Match.");
 
                                 System.exit(0);
+
                                 System.out.println();
 
                             }
@@ -451,6 +470,7 @@ public class CSCMatch implements Serializable
                         System.out.println("Thank you for using CSC Match.");
 
                         System.exit(0);
+
                         System.out.println();
 
                     }
