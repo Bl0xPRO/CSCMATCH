@@ -334,14 +334,17 @@ public class CSCMatch implements Serializable
                                             m2.score = m1.calculateCompatability(m2);
                                             Match newMatch = new Match(m2.getName(),m2.getScore());
                                             m1.addMatch(newMatch);
+                                            break;
                                         }
-
+                                        
 
                                         if(m1.top5.isEmpty() == false)
                                         {
                                             for( int i = 0; i < 5; i++)
                                             {
-                                                System.out.println(m1.top5.get(i).getMatchName());
+                                                if(m1.top5.size() > i) {
+                                            	System.out.println(m1.top5.get(i).getMatchName());
+                                                }
 
                                             }
                                         }
