@@ -387,7 +387,7 @@ public class CSCMatch implements Serializable
 
                                 if (newName.contains("regress"))
                                 {
-                                    System.out.println("Returning to Menu");
+                                    System.out.println("Returning to Menu. Please press enter.");
 
                                     break;
                                 }
