@@ -35,23 +35,7 @@ public class Member implements Serializable
 	   this.year = year;
    }
    
-   public void addInterest(String interest, int interestLevel)
-  {
-	   boolean found = false;
-	for(Interest in : interestList)
-	{
-		
-		if(interest.equalsIgnoreCase(in.getTopic()))
-		{
-			found = true;
-			in.changeTopicInterest(interestLevel);	
-		}
-	}
-	if(!found) {
-		Interest newI = new Interest(interest, interestLevel);
-		interestList.add(newI);
-	}
-   }
+ 
    
    public String getName()
    {
@@ -101,31 +85,78 @@ public class Member implements Serializable
 	   if (top5.isEmpty()) {
 		   top5.add(newMatch);
 	   }
-	  else
+	   else
 	   {
 		   top = top5.getFirst();
 		   
-		   while(index < top5.size()) 
-		   {
+		   while(index < top5.size()) {
 			   
-			   if(top == top5.getLast() && top.getcompScore() <= newMatch.getcompScore())
-			   {
-				   top5.add(index, newMatch);
-				   break;
-			   } else if (top == top5.getLast() && top.getcompScore() > newMatch.getcompScore()) {
-				   top5.addLast(newMatch);
-			   }
-			   else if(top.getcompScore() <= newMatch.getcompScore())
-			   {
-				top5.add(index, newMatch); 
-				break;
-			   }
-			   else if(top.getcompScore() > newMatch.getcompScore())
-			   {
-				index++ ;
-				top5.get(index);
-				break;
+		   if(top.getcompScore() > newMatch.getcompScore())
+		   {
+			top5.add(index, newMatch); 
 		   }
+		   else if(index == top5.size() - 1)
+		   {
+			top5.add(newMatch);
+		   }
+		   else
+		   {
+			   index ++;
+			   top = top5.get(index);
+		   }
+		 }
+	   }
 	
    }
+   public void addInterest(String interest, int interestLevel)
+   {
+ 	   boolean found = false;
+ 	for(Interest in : interestList)
+ 	{
+ 		
+ 		if(interest.equalsIgnoreCase(in.getTopic()))
+ 		{
+ 			found = true;
+ 			in.changeTopicInterest(interestLevel);	
+ 		}
+ 	}
+ 	if(!found) {
+ 		
+ 		 Interest newI = new Interest(interest, interestLevel);
+ 		 interestList.add(newI);
+ 		 
+ 		 //This code was supposed to order the interest as we added them to a member but was problematic
+ 		 
+ 		/* Interest top;
+ 		   int index = 0;
+ 		   if (interestList.isEmpty()) {
+ 			   interestList.add(newI);
+ 		   }
+ 		   else
+ 		   {
+ 			   top = interestList.getFirst();
+ 			   
+ 			   while(index < interestList.size())
+ 			   {
+ 				  if(top.getTopicInterest() > newI.getTopicInterest())
+ 				   {
+ 					interestList.add(index, newI); 
+ 				   }
+ 				   else if(index == top5.size() - 1)
+ 				   {
+ 					interestList.add(newI);
+ 				   }
+ 				   else
+ 				   {
+ 					   index ++;
+ 					   top = interestList.get(index);
+ 				   }
+ 			   }
+ 		   }
+ 		*/
+ 		
+ 	}
+    }
+ 
+   
 }
