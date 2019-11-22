@@ -18,10 +18,5 @@ public class Match implements Serializable
 	public int getcompScore() {
 		return compScore;
 	}
-	public String toString()
-	{
-		return matchName + " " + compScore;
-	}
-	
 	
 }
